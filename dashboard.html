@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaMind Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background-color: #07130e; color: #d1d5db; }
+        .sidebar-item-active { background-color: rgba(16, 185, 129, 0.1); color: #10b981; border-radius: 8px; }
+        .card-bg { background-color: #12241d; border: 1px solid rgba(16, 185, 129, 0.1); }
+        .anomaly-gradient {
+            background: linear-gradient(90deg, #eab308 0%, #eab308 87%, transparent 87%);
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+
+    <aside class="w-64 border-r border-emerald-900/30 p-6 flex flex-col gap-8">
+        <div class="flex items-center gap-3 text-emerald-400 font-bold text-2xl">
+            <div class="w-8 h-8 bg-emerald-500 rounded-lg"></div>
+            AquaMind
+        </div>
+        
+        <nav class="flex-col space-y-2 text-gray-400">
+    <a href="dashboard.html" class="nav-link p-3 flex items-center gap-3 rounded-lg hover:bg-emerald-900/20 hover:text-emerald-400 transition-colors">
+        <span>⊞</span> Dashboard
+    </a>
+    
+    <a href="analytics.html" class="nav-link p-3 flex items-center gap-3 rounded-lg hover:bg-emerald-900/20 hover:text-emerald-400 transition-colors">
+        <span>📊</span> Analytics
+    </a>
+    
+    <a href="ai-decision.html" class="nav-link p-3 flex items-center gap-3 rounded-lg hover:bg-emerald-900/20 hover:text-emerald-400 transition-colors">
+        <span>🧠</span> AI Decision
+    </a>
+    
+    <a href="alerts.html" class="nav-link p-3 flex items-center gap-3 rounded-lg hover:bg-emerald-900/20 hover:text-emerald-400 transition-colors">
+        <span>🔔</span> Alerts
+    </a>
+    
+    <a href="farm-zones.html" class="nav-link p-3 flex items-center gap-3 rounded-lg hover:bg-emerald-900/20 hover:text-emerald-400 transition-colors">
+        <span>🗺️</span> Farm Zones
+    </a>
+
+     
+</nav>
+    </aside>
+
+    <main class="flex-1 p-10 overflow-y-auto">
+        <div class="flex justify-end mb-8 items-center gap-4">
+            <span class="text-emerald-500 text-sm flex items-center gap-2">
+                <span class="w-2 h-2 bg-emerald-500 rounded-full"></span> System Online
+            </span>
+            <div class="w-10 h-10 bg-gray-800 rounded-full border border-emerald-500/50"></div>
+        </div>
+
+        <div class="grid grid-cols-4 gap-6 mb-8">
+            <div class="card-bg p-6 rounded-xl">
+                <p class="text-gray-400 text-sm mb-4">Soil Moisture</p>
+                <h2 class="text-3xl font-bold text-white">32%</h2>
+                <p class="text-emerald-500 text-xs mt-2">Status: Normal</p>
+            </div>
+            <div class="card-bg p-6 rounded-xl">
+                <p class="text-gray-400 text-sm mb-4">Temperature</p>
+                <h2 class="text-3xl font-bold text-white">28°C</h2>
+            </div>
+            <div class="card-bg p-6 rounded-xl">
+                <p class="text-gray-400 text-sm mb-4">Humidity</p>
+                <h2 class="text-3xl font-bold text-white">65%</h2>
+            </div>
+            <div class="card-bg p-6 rounded-xl">
+                <p class="text-gray-400 text-sm mb-4">Pump Status</p>
+                <h2 class="text-3xl font-bold text-white">ON</h2>
+                <p class="text-emerald-500 text-xs mt-2">Status: Active</p>
+            </div>
+        </div>
+
+        <div class="card-bg border-yellow-700/50 p-6 rounded-xl mb-8 relative">
+            <p class="text-yellow-500 text-sm font-bold flex items-center gap-2 mb-2">⚠ System Insight</p>
+            <h3 class="text-xl font-bold text-white mb-1">Sensor Anomaly Detected</h3>
+            <p class="text-gray-400 text-sm mb-6">Moisture readings inconsistent with environmental conditions</p>
+            
+            <div class="w-full bg-black/40 h-2 rounded-full overflow-hidden relative">
+                <div class="anomaly-gradient h-full w-full"></div>
+            </div>
+            <div class="flex justify-between mt-2 text-[10px] text-gray-500 uppercase tracking-widest">
+                <span>Confidence</span>
+                <span>87%</span>
+            </div>
+        </div>
+
+        <div class="card-bg p-6 rounded-xl h-80">
+            <h3 class="text-white font-bold mb-4">Soil Moisture Over Time</h3>
+            <canvas id="moistureChart"></canvas>
+        </div>
+    </main>
+
+    <script>
+        const ctx = document.getElementById('moistureChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['1', '2', '3', '4', '5', '6', '7', '8'],
+                datasets: [{
+                    data: [45, 42, 38, 32, 85, 88, 86, 82],
+                    borderColor: '#10b981',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    pointBackgroundColor: '#10b981',
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { min: 0, max: 100, grid: { color: '#1a332a' } },
+                    x: { display: false }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+    </script>
+</body>
+</html>

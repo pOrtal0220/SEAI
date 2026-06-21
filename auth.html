@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaMind - Authentication</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #07130e; color: #d1d5db; font-family: 'Inter', sans-serif; }
+        .auth-card { background-color: #12241d; border: 1px solid rgba(16, 185, 129, 0.1); }
+        .input-field { 
+            background-color: #0a1a14; 
+            border: 1px solid #2d4a3e; 
+            transition: all 0.2s;
+        }
+        .input-field:focus { 
+            border-color: #10b981; 
+            outline: none; 
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2); 
+        }
+        .btn-primary { 
+            background-color: #10b981; 
+            color: #07130e; 
+            transition: transform 0.1s; 
+        }
+        .btn-primary:active { transform: scale(0.98); }
+        
+        /* Decorative Background */
+        .bg-pattern {
+            background-image: radial-gradient(#10b981 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body class="h-screen flex items-center justify-center p-6 relative overflow-hidden">
+    <div class="absolute inset-0 bg-pattern"></div>
+
+    <div class="auth-card w-full max-w-4xl flex rounded-2xl overflow-hidden shadow-2xl relative z-10">
+        <div class="hidden md:flex w-1/2 bg-emerald-900/20 p-12 flex-col justify-between border-r border-emerald-900/30">
+            <div class="flex items-center gap-3 text-emerald-400 font-bold text-2xl">
+                <div class="w-8 h-8 bg-emerald-500 rounded-lg"></div>
+                AquaMind
+            </div>
+            <div>
+                <h1 class="text-4xl font-bold text-white mb-4">Precision Intelligence for Modern Farming.</h1>
+                <p class="text-gray-400 leading-relaxed">Monitor soil health, automate irrigation, and maximize yields with AI-driven insights.</p>
+            </div>
+            <div class="text-xs text-gray-500 italic">© 2026 AquaMind Systems Global</div>
+        </div>
+
+        <div class="w-full md:w-1/2 p-12 flex flex-col justify-center">
+            <div id="auth-header" class="mb-8">
+                <h2 class="text-3xl font-bold text-white mb-2" id="form-title">Welcome Back</h2>
+                <p class="text-gray-500 text-sm" id="form-subtitle">Enter your credentials to access your farm.</p>
+            </div>
+
+            <form id="auth-form" class="space-y-5">
+                <div id="name-group" class="hidden">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Full Name</label>
+                    <input type="text" class="input-field w-full px-4 py-3 rounded-lg text-white" placeholder="John Doe">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Email Address</label>
+                    <input type="email" required class="input-field w-full px-4 py-3 rounded-lg text-white" placeholder="name@farm.com">
+                </div>
+
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <label class="block text-xs font-bold text-gray-500 uppercase">Password</label>
+                        <a href="#" class="text-xs text-emerald-500 hover:underline" id="forgot-pass">Forgot?</a>
+                    </div>
+                    <input type="password" required class="input-field w-full px-4 py-3 rounded-lg text-white" placeholder="••••••••">
+                </div>
+
+                <button type="submit" class="btn-primary w-full py-3 rounded-lg font-bold mt-4" id="submit-btn">
+                    Sign In
+                </button>
+            </form>
+
+            <div class="mt-8 text-center text-sm">
+                <span class="text-gray-500" id="toggle-text">Don't have an account?</span>
+                <button class="text-emerald-500 font-bold ml-1 hover:underline" id="toggle-auth">Create Account</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+</body>
+</html>

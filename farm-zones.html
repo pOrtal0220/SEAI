@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaMind - Farm Zones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #07130e; color: #d1d5db; font-family: 'Inter', sans-serif; }
+        .sidebar-item-active { background-color: rgba(16, 185, 129, 0.1); color: #10b981; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.3); }
+        
+        .zone-card { background-color: #12241d; border: 1px solid rgba(16, 185, 129, 0.1); transition: all 0.2s cursor: pointer; }
+        .zone-card:hover { border-color: rgba(16, 185, 129, 0.4); }
+        .zone-card.active { border: 2px solid #10b981; background-color: rgba(16, 185, 129, 0.05); }
+        .zone-card.anomaly { border: 1px solid #eab308; }
+        .zone-card.anomaly.active { border: 2px solid #eab308; }
+
+        .detail-panel { background-color: #12241d; border-radius: 16px; }
+        .detail-item { background-color: rgba(0,0,0,0.2); border-radius: 12px; padding: 16px; }
+        
+        .progress-bg { background: rgba(0,0,0,0.3); height: 6px; border-radius: 3px; overflow: hidden; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+
+    <aside class="w-64 border-r border-emerald-900/30 p-6 flex flex-col gap-8">
+        <div class="flex items-center gap-3 text-emerald-400 font-bold text-2xl">
+            <div class="w-8 h-8 bg-emerald-500 rounded-lg"></div>
+            AquaMind
+        </div>
+        <nav class="flex-col space-y-2 text-gray-400">
+          <a href="dashboard.html" class="nav-link p-3 flex items-center gap-3 rounded-lg hover:bg-emerald-900/20       hover:text-emerald-400 transition-colors">
+              <span>⊞</span> Dashboard
+          </a>
+          
+          <a href="analytics.html" class="nav-link p-3 flex items-center gap-3 rounded-lg hover:bg-emerald-900/20 hover:text-emerald-400 transition-colors">
+              <span>📊</span> Analytics
+          </a>
+          
+          <a href="ai-decision.html" class="nav-link p-3 flex items-center gap-3 rounded-lg hover:bg-emerald-900/20 hover:text-emerald-400 transition-colors">
+              <span>🧠</span> AI Decision
+          </a>
+          
+          <a href="alerts.html" class="nav-link p-3 flex items-center gap-3 rounded-lg hover:bg-emerald-900/20 hover:text-emerald-400 transition-colors">
+              <span>🔔</span> Alerts
+          </a>
+          
+          <a href="farm-zones.html" class="nav-link p-3 flex items-center gap-3 rounded-lg hover:bg-emerald-900/20 hover:text-emerald-400 transition-colors">
+              <span>🗺️</span> Farm Zones
+          </a>
+
+         
+        </nav>
+    </aside>
+
+    <main class="flex-1 p-10 overflow-hidden flex flex-col">
+        <header class="flex justify-end mb-8 items-center gap-4">
+            <span class="text-emerald-500 text-sm flex items-center gap-2">
+                <span class="w-2 h-2 bg-emerald-500 rounded-full"></span> System Online
+            </span>
+            <div class="w-10 h-10 bg-gray-800 rounded-full border border-emerald-500/50"></div>
+        </header>
+
+        <h1 class="text-3xl font-bold text-white mb-8">Farm Zone Overview</h1>
+
+        <div class="flex gap-8 flex-1 overflow-hidden">
+            <div class="flex-1 grid grid-cols-3 gap-4 content-start overflow-y-auto pr-4" id="zoneGrid">
+                </div>
+
+            <div class="w-80 flex flex-col gap-4">
+                <div class="detail-panel p-6 flex-1">
+                    <h2 class="text-xl font-bold text-white mb-6" id="detailTitle">Zone Details</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="detail-item">
+                            <p class="text-gray-500 text-xs uppercase font-bold mb-2">Current Moisture</p>
+                            <p class="text-2xl font-bold text-white" id="detailMoisture">--</p>
+                        </div>
+                        <div class="detail-item">
+                            <p class="text-gray-500 text-xs uppercase font-bold mb-2">Status</p>
+                            <p class="text-lg font-bold" id="detailStatus">--</p>
+                        </div>
+                        <div class="detail-item">
+                            <p class="text-gray-500 text-xs uppercase font-bold mb-2">Last Alert</p>
+                            <p class="text-white" id="detailAlert">None recorded</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="zoneAlertBox" class="bg-[#1a2e26] border border-yellow-700/50 p-4 rounded-xl hidden">
+                    <p class="text-yellow-500 font-bold text-sm mb-1">⚠ Alert</p>
+                    <p class="text-gray-400 text-xs leading-relaxed">Abnormal sensor reading detected. Irrigation paused pending investigation.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="farm-zones.js"></script>
+</body>
+</html>

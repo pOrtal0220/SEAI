@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaMind - AI Decision</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #07130e; color: #d1d5db; font-family: 'Inter', sans-serif; }
+        .sidebar-item-active { background-color: rgba(16, 185, 129, 0.1); color: #10b981; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .decision-box { background-color: #12241d; border: 1px solid #ef4444; }
+        .explanation-box { background-color: #12241d; }
+        .step-circle { width: 24px; height: 24px; background-color: #065f46; color: #10b981; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 12px; font-weight: bold; }
+        .progress-container { background-color: rgba(0,0,0,0.3); height: 8px; border-radius: 4px; overflow: hidden; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+
+    <aside class="w-64 border-r border-emerald-900/30 p-6 flex flex-col gap-8">
+        <div class="flex items-center gap-3 text-emerald-400 font-bold text-2xl">
+            <div class="w-8 h-8 bg-emerald-500 rounded-lg"></div>
+            AquaMind
+        </div>
+        <nav class="flex-col space-y-2 text-gray-400">
+    <a href="dashboard.html" class="nav-link p-3 flex items-center gap-3 rounded-lg hover:bg-emerald-900/20 hover:text-emerald-400 transition-colors">
+        <span>⊞</span> Dashboard
+    </a>
+    
+    <a href="analytics.html" class="nav-link p-3 flex items-center gap-3 rounded-lg hover:bg-emerald-900/20 hover:text-emerald-400 transition-colors">
+        <span>📊</span> Analytics
+    </a>
+    
+    <a href="ai-decision.html" class="nav-link p-3 flex items-center gap-3 rounded-lg hover:bg-emerald-900/20 hover:text-emerald-400 transition-colors">
+        <span>🧠</span> AI Decision
+    </a>
+    
+    <a href="alerts.html" class="nav-link p-3 flex items-center gap-3 rounded-lg hover:bg-emerald-900/20 hover:text-emerald-400 transition-colors">
+        <span>🔔</span> Alerts
+    </a>
+    
+    <a href="farm-zones.html" class="nav-link p-3 flex items-center gap-3 rounded-lg hover:bg-emerald-900/20 hover:text-emerald-400 transition-colors">
+        <span>🗺️</span> Farm Zones
+    </a>
+
+
+</nav>
+    </aside>
+
+    <main class="flex-1 p-10 overflow-y-auto">
+        <div class="flex justify-end mb-8 items-center gap-4">
+            <span class="text-emerald-500 text-sm flex items-center gap-2">
+                <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> System Online
+            </span>
+            <div class="w-10 h-10 bg-gray-800 rounded-full border border-emerald-500/50"></div>
+        </div>
+
+        <div class="decision-box rounded-2xl p-12 text-center mb-8">
+            <p class="text-gray-400 text-sm font-semibold mb-4 tracking-widest uppercase">AI Decision</p>
+            <div class="flex flex-col items-center gap-4">
+                <div class="w-16 h-16 rounded-full border-4 border-red-500 flex items-center justify-center text-red-500 text-3xl font-bold">✕</div>
+                <h1 class="text-5xl font-bold text-white">Do NOT Irrigate</h1>
+                <p class="text-gray-400 text-lg">Sensor likely malfunctioning</p>
+            </div>
+
+            <div class="mt-12 max-w-4xl mx-auto">
+                <div class="flex justify-between text-xs text-gray-400 mb-2">
+                    <span class="font-bold tracking-tighter">Confidence Level</span>
+                    <span>92%</span>
+                </div>
+                <div class="progress-container">
+                    <div id="mainConfidenceBar" class="bg-red-500 h-full transition-all duration-1000" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="explanation-box rounded-xl p-8 mb-8">
+            <h3 class="text-white text-xl font-bold mb-6">AI Explanation</h3>
+            <div class="space-y-6">
+                <div class="flex items-start gap-4">
+                    <div class="step-circle">1</div>
+                    <p class="text-gray-300">Moisture jumped from <span class="text-emerald-400">10% → 90%</span> instantly</p>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="step-circle">2</div>
+                    <p class="text-gray-300">Temperature stable — no real change expected</p>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="step-circle">3</div>
+                    <p class="text-gray-300">Pattern matches known sensor fault from historical data</p>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="step-circle">4</div>
+                    <p class="text-gray-300">No corresponding weather event recorded</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="explanation-box rounded-xl p-8">
+            <h3 class="text-white text-xl font-bold mb-8">Confidence Breakdown</h3>
+            
+            <div class="space-y-8">
+                <div>
+                    <div class="flex justify-between text-sm mb-2">
+                        <span class="text-gray-400">Data Quality Check</span>
+                        <span class="text-white">95%</span>
+                    </div>
+                    <div class="progress-container">
+                        <div id="breakdownBar1" class="bg-emerald-500 h-full transition-all duration-1000" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-2">
+                        <span class="text-gray-400">Pattern Recognition</span>
+                        <span class="text-white">91%</span>
+                    </div>
+                    <div class="progress-container">
+                        <div id="breakdownBar2" class="bg-emerald-500 h-full transition-all duration-1000" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="ai-decision.js"></script>
+</body>
+</html>
